@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf=8">
+    <title>TODO_List</title>
+    <link rel="stylesheet" href="dist/css/app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/e3ae05b8e6.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <h1 class="main-title">TODO LIST</h1>
+        <p>by VUE</p>
+        <div id="app">
+            <div class="add">
+            <input type="text"
+            class="addTask"
+            v-model="newTask"
+            v-on:keydown.enter.shift="addTask"
+            placeholder="新しいタスクを入れよう"
+            style="outline:0px none black">
+
+            <button v-on:click="addTask"
+            class="addButton">追加</button>
+            </div>
+
+            <form class="search">
+            <i class="fa fa-search searchBox__icon"
+            style="margin-left: 5px;"></i>
+            <input type="text"
+            class="searchBox"
+            placeholder="タスク検索"
+            v-model="searchWord"
+            style="outline:0px none black">
+            </form>
+            
+            <ul class="list">
+            <li class="list-task"
+            v-bind:class="{done: task.isChecked}"
+            v-bind:key="task.id"
+            v-for="task in filteredTask">
+                    <input type="checkbox"
+                    v-model="task.isChecked">
+                    <span>{{task.title}}</span>
+                    <i class="fa fa-trash fa-0.5x icon-trash"
+                    v-on:click="removeTask(index)"></i>
+            </li>
+         </ul>
+        </div>
+    </div>
+
+    <script src="dist/js/bundle.js"></script>
+</body>
+</html>
